@@ -8,8 +8,9 @@ public class XAndO {
 		// TODO Auto-generated method stub
 		Scanner s = new Scanner(System.in);
 		String[] array = { "x", "x", "o", "o", "x", "o", "x", "o", "x" };
-		array = startGame(array);
-
+		
+		String [] whoIsNext = new String [1];
+		array = startGame(array,whoIsNext);
 		print(array);
 
 	}
@@ -27,11 +28,12 @@ public class XAndO {
 
 	}
 
-	public static String[] startGame(String[] array) {
+	public static String[] startGame(String[] array,String [] whoIsNext) {
 
 		for (int i = 0; i < array.length; i++) {
 			array[i] = " ";
 		}
+		whoIsNext [0]= "x";
 		return array;
 	}
 
@@ -46,6 +48,8 @@ public class XAndO {
 		return false;
 	}
 	public static String[] makeAMuve(String[] array,int place, String sign) {
-		
+		array[place-1]=sign;
+		return array;
 	}
+	
 }
