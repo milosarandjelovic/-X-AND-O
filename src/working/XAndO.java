@@ -48,8 +48,8 @@ public class XAndO {
 		return false;
 	}
 
-	public static String[] makeAMuve(String[] array, int place, String sign) {
-		array[place - 1] = sign;
+	public static String[] makeAMuve(String[] array, int position, String sign) {
+		array[position - 1] = sign;
 		return array;
 	}
 
@@ -81,22 +81,35 @@ public class XAndO {
 			winner = true;
 		} else if (array[6] == sign && array[7] == sign && array[8] == sign) {
 			winner = true;
-		}
-
-		if (array[0] == sign && array[3] == sign && array[6] == sign) {
+		} else if (array[0] == sign && array[3] == sign && array[6] == sign) {
 			winner = true;
 		} else if (array[1] == sign && array[4] == sign && array[7] == sign) {
 			winner = true;
 		} else if (array[2] == sign && array[5] == sign && array[8] == sign) {
 			winner = true;
-		}
-
-		if (array[0] == sign && array[4] == sign && array[8] == sign) {
+		} else if (array[0] == sign && array[4] == sign && array[8] == sign) {
 			winner = true;
 		} else if (array[2] == sign && array[4] == sign && array[6] == sign) {
 			winner = true;
 		}
 		return winner;
 
+	}
+
+	public static boolean isValidMove(int position) {
+		if (position < 10 && position > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public static int gameScore(String[] array) {
+		if (isWinner(array, "x")) {
+			return 1;
+		} else if (isWinner(array, "o")) {
+			return 2;
+		} else {
+			return 0;
+		}
 	}
 }
