@@ -7,11 +7,34 @@ public class XAndO {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner s = new Scanner(System.in);
-		String[] array = { "x", "x", "o", "o", "x", "o", "x", "o", "x" };
-
+		String[] array = new String[9];
 		String[] whoIsNext = new String[1];
+
 		array = startGame(array, whoIsNext);
-		print(array);
+
+		while (!isGameOver(array) && gameScore(array) == 0) {
+			System.out.print("Player '" + whoIsNext[0] + "' make your move: ");
+			int position = s.nextInt();
+			position = position - 1;
+			if (isValidMove(position) && isFieldFree(array, position)) {
+				makeAMove(array, position, whoIsNext[0]);
+				playNext(whoIsNext);
+
+				print(array);
+				System.out.println();
+
+			} else {
+				System.out.println("Invalid position.");
+			}
+		}
+		System.out.println("Game over!");
+		if (gameScore(array) == 1) {
+			System.out.println("Winner is X.");
+		} else if (gameScore(array) == 2) {
+			System.out.println("Winner is O.");
+		} else {
+			System.out.println("No winner.");
+		}
 
 	}
 
@@ -37,19 +60,18 @@ public class XAndO {
 		return array;
 	}
 
-	public static boolean isFieldFree(String[] array) {
-		String x = "x";
-		String o = "o";
-		for (int i = 0; i < array.length; i++) {
-			if (!array[i].equals(x) && !array[i].equals(o)) {
-				return true;
-			}
+	public static boolean isFieldFree(String[] array, int position) {
+
+		if (array[position] == " ") {
+			return true;
+
 		}
 		return false;
+
 	}
 
-	public static String[] makeAMuve(String[] array, int position, String sign) {
-		array[position - 1] = sign;
+	public static String[] makeAMove(String[] array, int position, String sign) {
+		array[position] = sign;
 		return array;
 	}
 
@@ -97,7 +119,7 @@ public class XAndO {
 	}
 
 	public static boolean isValidMove(int position) {
-		if (position < 10 && position > 0) {
+		if (position < 9 && position >= 0) {
 			return true;
 		}
 		return false;
